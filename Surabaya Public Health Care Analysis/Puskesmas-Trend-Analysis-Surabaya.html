@@ -420,7 +420,7 @@ library(dplyr)</code></pre>
   lapply(read.csv,sep=&quot;;&quot;) %&gt;% 
   bind_rows
 glimpse(df)</code></pre>
-<pre><code>## Rows: 15,469
+<pre><code>## Rows: 15,471
 ## Columns: 10
 ## $ Periode          &lt;chr&gt; &quot;Agustus&quot;, &quot;Agustus&quot;, &quot;Agustus&quot;, &quot;Agustus&quot;, &quot;Agustus&quot;…
 ## $ Wilayah          &lt;chr&gt; &quot;Surabaya Barat&quot;, &quot;Surabaya Barat&quot;, &quot;Surabaya Barat&quot;,…
@@ -438,7 +438,7 @@ dataframe which are “X..DOCTYPE.html.” and “x..” Using subset
 function</p>
 <pre class="r"><code>df&lt;-subset(df,select=-c(X..DOCTYPE.html.,X...))
 glimpse(df)</code></pre>
-<pre><code>## Rows: 15,469
+<pre><code>## Rows: 15,471
 ## Columns: 8
 ## $ Periode         &lt;chr&gt; &quot;Agustus&quot;, &quot;Agustus&quot;, &quot;Agustus&quot;, &quot;Agustus&quot;, &quot;Agustus&quot;,…
 ## $ Wilayah         &lt;chr&gt; &quot;Surabaya Barat&quot;, &quot;Surabaya Barat&quot;, &quot;Surabaya Barat&quot;, …
@@ -498,6 +498,7 @@ limit to top 5 most visited public health care using top_n function</p>
 <p>As we can see here from the graph above currently the most visited
 Public Health Care in Surabaya is Puskesmas Jagir with total of 65400
 visitors from January to November 2022</p>
+<p>Github Links(<a href="https://github.com/pandugp-cross/01-Self-Projects/tree/main/Surabaya%20Public%20Health%20Care%20Analysis">Link</a>)</p>
 </div>
 
 
