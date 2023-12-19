@@ -1,0 +1,88 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Jun 21 22:01:22 2023
+
+@author: Pariz Nanap Pandu Gumelar Pratama
+"""
+import tkinter as tk
+import os
+import pandas as pd
+import shutil
+root=tk.Tk()
+pathinput="Input/Input BAUT.xlsx"
+checkinput=os.path.exists(pathinput)
+fileprocessed=0
+def BASSAC(x,y,z):
+    global fileprocessed
+    checkf=os.path.exists("Output/"+str(x))
+    src=""
+    dst=""
+    if checkf==False:
+        os.mkdir("Output/"+str(x))
+    dst="Output/"+str(x)
+    baseline=os.path.exists("Reference/Baseline Approved/"+str(y))
+    if baseline==True:
+        src="Reference/Baseline Approved/"+str(y)
+        baselinef=os.listdir("Reference/Baseline Approved/"+str(y))
+        shutil.copytree(src,dst,dirs_exist_ok = True)
+    Capture=os.path.exists("Reference/Capture Term of Payment")
+    if Capture==True:
+        src="Reference/Capture Term of Payment"
+        capturef=os.listdir("Reference/Capture Term of Payment")
+        shutil.copytree(src,dst,dirs_exist_ok = True)
+    fileprocessed=fileprocessed+1
+def BAPAC(x,y,z):
+    global fileprocessed
+    checkf=os.path.exists("Output/"+str(x))
+    src=""
+    dst=""
+    if checkf==False:
+        os.mkdir("Output/"+str(x))
+    dst="Output/"+str(x)
+    baseline=os.path.exists("Reference/Baseline Approved/"+str(y))
+    if baseline==True:
+        src="Reference/Baseline Approved/"+str(y)
+        baselinef=os.listdir("Reference/Baseline Approved/"+str(y))
+        shutil.copytree(src,dst,dirs_exist_ok = True)
+    Capture=os.path.exists("Reference/Capture Term of Payment")
+    if Capture==True:
+        src="Reference/Capture Term of Payment"
+        capturef=os.listdir("Reference/Capture Term of Payment")
+        shutil.copytree(src,dst,dirs_exist_ok = True)
+    fileprocessed=fileprocessed+1
+def BASG(x,y,z):
+    global fileprocessed
+    checkf=os.path.exists("Output/"+str(x))
+    src=""
+    dst=""
+    if checkf==False:
+        os.mkdir("Output/"+str(x))
+    dst="Output/"+str(x)
+    Capture=os.path.exists("Reference/Capture Term of Payment")
+    if Capture==True:
+        src="Reference/Capture Term of Payment"
+        capturef=os.listdir("Reference/Capture Term of Payment")
+        shutil.copytree(src,dst,dirs_exist_ok = True)
+    fileprocessed=fileprocessed+1
+def NotF(x,y,z):
+    global fileprocessed
+    fileprocessed=fileprocessed
+switch={
+        "BA Installation/SSAC":BASSAC,
+        "BAUT/BAMS PAC":BAPAC,
+        "BAMS/BAMG":BASG
+        }
+def option(x,y,z):
+    return switch.get(z,NotF)(x,y,z)
+if checkinput==False:
+    message = tk.Label(root, text="Folder Not Exist, Pastikan Folder input ada dan File Input BAUT.xlsx ada didalam")
+    message.pack()
+    root.mainloop()
+else:
+    BAInput = pd.read_excel(pathinput,sheet_name="Data")
+    index=(len(BAInput.index))
+    for x in range (index):
+        option(BAInput.iloc[x,0], BAInput.iloc[x,1], BAInput.iloc[x,2])
+    message = tk.Label(root, text="Finished Processing, "+str(fileprocessed)+" out of "+str(index))
+    message.pack()
+    root.mainloop()
